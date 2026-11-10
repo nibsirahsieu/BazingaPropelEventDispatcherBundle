@@ -3,7 +3,6 @@
 namespace Bazinga\Bundle\PropelEventDispatcherBundle\EventDispatcher;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -40,15 +39,15 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatch($eventName, Event $event = null)
+    public function dispatch(object $event, ?string $eventName = null): object
     {
-        return $this->getEventDispatcher()->dispatch($eventName, $event);
+        return $this->getEventDispatcher()->dispatch($event, $eventName);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addListener($eventName, $listener, $priority = 0)
+    public function addListener(string $eventName, $listener, int $priority = 0): void
     {
         $this->getEventDispatcher()->addListener($eventName, $listener, $priority);
     }
@@ -56,7 +55,7 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(EventSubscriberInterface $subscriber)
+    public function addSubscriber(EventSubscriberInterface $subscriber): void
     {
         $this->getEventDispatcher()->addSubscriber($subscriber);
     }
@@ -64,7 +63,7 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function removeListener($eventName, $listener)
+    public function removeListener(string $eventName, $listener): void
     {
         $this->getEventDispatcher()->removeListener($eventName, $listener);
     }
@@ -72,7 +71,7 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(EventSubscriberInterface $subscriber)
+    public function removeSubscriber(EventSubscriberInterface $subscriber): void
     {
         $this->getEventDispatcher()->removeSubscriber($subscriber);
     }
@@ -80,7 +79,7 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function getListeners($eventName = null)
+    public function getListeners(?string $eventName = null): array
     {
         return $this->getEventDispatcher()->getListeners($eventName);
     }
@@ -88,7 +87,7 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function hasListeners($eventName = null)
+    public function hasListeners(?string $eventName = null): bool
     {
         return $this->getEventDispatcher()->hasListeners($eventName);
     }
@@ -96,7 +95,7 @@ class LazyEventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function getListenerPriority($eventName, $listener) 
+    public function getListenerPriority(string $eventName, $listener): ?int
     {
         if (!method_exists($this->getEventDispatcher(), 'getListenerPriority')) {
             throw new \BadMethodCallException('getListenerPriority() is not implemented');

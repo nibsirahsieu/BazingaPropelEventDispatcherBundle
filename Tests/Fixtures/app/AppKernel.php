@@ -43,7 +43,7 @@ class AppKernel extends Kernel
         parent::__construct($environment, $debug);
     }
 
-    public function registerBundles()
+    public function registerBundles():iterable
     {
         return array(
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -61,17 +61,17 @@ class AppKernel extends Kernel
         return __DIR__;
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return sys_get_temp_dir().'/'.Kernel::VERSION.'/bazinga-propel-eventdispatcher/cache/'.$this->environment;
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return sys_get_temp_dir().'/'.Kernel::VERSION.'/bazinga-propel-eventdispatcher/logs';
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/config/'.$this->environment.'.yml');
     }

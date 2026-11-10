@@ -8,7 +8,7 @@ class MyEventListener
 {
     private $events = array();
 
-    public function preSave(Event $event)
+    public function preSave(object $event)
     {
         $this->events[] = $event;
     }

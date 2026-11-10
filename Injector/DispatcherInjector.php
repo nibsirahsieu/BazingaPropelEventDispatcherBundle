@@ -16,7 +16,7 @@ class DispatcherInjector
 
     private $logger;
 
-    public function __construct(ContainerInterface $container, array $classes, LoggerInterface $logger = null)
+    public function __construct(ContainerInterface $container, array $classes, ?LoggerInterface $logger = null)
     {
         $this->classes   = $classes;
         $this->container = $container;
@@ -29,7 +29,7 @@ class DispatcherInjector
      * This methods has to accept unknown classes as it is triggered during
      * the boot and so will be called before running the propel:build command.
      */
-    public function initializeModels()
+    public function initializeModels(): void
     {
         foreach ($this->classes as $id => $class) {
             $baseClass = sprintf('%s\\om\\Base%s',

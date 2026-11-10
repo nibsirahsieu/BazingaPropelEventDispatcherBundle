@@ -19,7 +19,7 @@ class RegisterEventListenersPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         foreach ($container->findTaggedServiceIds('propel.event_listener') as $id => $attributes) {
             foreach ($attributes as $attrs) {
@@ -138,12 +138,12 @@ class ExtractingEventDispatcher extends EventDispatcher implements EventSubscrib
 
     public static $subscriber;
 
-    public function addListener($eventName, $listener, $priority = 0)
+    public function addListener(string $eventName, $listener, int $priority = 0): void
     {
         $this->listeners[] = array($eventName, $listener[1], $priority);
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         $callback = array(self::$subscriber, 'getSubscribedEvents');
 
