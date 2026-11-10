@@ -1,5 +1,5 @@
 {
-    "name": "dayspring-tech/propel-eventdispatcher-bundle",
+    "name": "willdurand/propel-eventdispatcher-bundle",
     "description": "Integrates the Propel EventDispatcherBehavior into Symfony.",
     "license": "MIT",
     "require": {
@@ -34,7 +34,9 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Bazinga\\Bundle\\PropelEventDispatcherBundle": "" }
+        "psr-0": {
+            "Bazinga\\Bundle\\PropelEventDispatcherBundle": ""
+        }
     },
     "target-dir": "Bazinga/Bundle/PropelEventDispatcherBundle",
     "scripts": {
@@ -42,8 +44,5 @@
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpunit -c ./phpunit.xml.dist"
         ]
-    },
-    "replace": {
-        "willdurand/propel-eventdispatcher-bundle": "<=1.0.1"
     }
 }
